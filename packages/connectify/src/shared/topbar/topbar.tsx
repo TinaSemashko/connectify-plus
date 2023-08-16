@@ -1,28 +1,33 @@
 import { useState } from "react";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import { MenuItems } from "../../constants/menuItems";
+import {
+  AppBar,
+  Toolbar,
+  Drawer,
+  IconButton,
+  ListItemButton,
+  Typography,
+} from "@mui/material";
+
 import { useLocation, useNavigate } from "react-router";
 import { Routes } from "../../app/routes";
 import { MenuItemsProfil } from "../../constants/menuItemsProfil";
 import { MenuItemsConnect } from "../../constants/menuItemsConnect";
+import CloseIcon from "@mui/icons-material/Close";
+
+import * as S from "./topbar.styled";
 
 let menuItemsArray: any[] = [];
 const menuItemsArrayProfil = Object.values(MenuItemsProfil);
 const menuItemsArrayConnect = Object.values(MenuItemsConnect);
 
-const drawerWidth = 240;
+const drawerWidth = "100%";
 
 const TopBar: React.FC = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -48,9 +53,24 @@ const TopBar: React.FC = () => {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{
+        textAlign: "center",
+        backgroundColor: "lightGreen.main",
+        height: "100%",
+        width: "100%",
+      }}
+    >
+      <S.CloseIconStyle>
+        <Typography variant="h6" color="colorWhite.main" className="close">
+          Close
+        </Typography>
+        <CloseIcon sx={{ fontSize: "2rem" }} />
+      </S.CloseIconStyle>
+
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        Connectify
       </Typography>
       <Divider />
       <List>

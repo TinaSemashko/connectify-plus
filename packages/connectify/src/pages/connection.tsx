@@ -10,12 +10,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes } from "./../app/routes";
 import { useNavigate } from "react-router";
+import { Validate, ValidationGroup } from "mui-validate";
 
 import * as S from "./connection.styled";
-import { Validate, ValidationGroup } from "mui-validate";
+import axios from "axios";
 
 const Connection: React.FC = () => {
   const navigate = useNavigate();
@@ -25,6 +26,13 @@ const Connection: React.FC = () => {
     messages: [],
     display: false,
   });
+  const [userdata, setUserdata] = useState("");
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = user;
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -40,6 +48,19 @@ const Connection: React.FC = () => {
       navigate(Routes.profil);
       //modal fenetre
     } else console.log("Corrigez les erreurs dans le formulaire");
+  };
+
+  useEffect(() => {
+    fetchGet();
+  }, []);
+
+  const fetchGet = async () => {
+    await axios
+      .get(`/users/profile`)
+      .then((response) => setUserdata(response.data))
+      .catch((err) => console.error(err));
+
+    console.log(userdata);
   };
 
   return (

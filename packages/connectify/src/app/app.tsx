@@ -63,12 +63,16 @@ export let theme = createTheme({
       fontFamily: "Inter, sans-serif",
     },
   },
+  breakpoints: {
+    keys: ["xs", "sm", "md", "lg", "xl"],
+    values: { xs: 0, sm: 568, md: 760, lg: 960, xl: 1200 },
+  },
 });
 theme = responsiveFontSizes(theme);
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={responsiveFontSizes(theme)}>
       <Topbar />
       <AppRoutes />
       <Footer />
