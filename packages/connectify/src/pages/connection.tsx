@@ -27,12 +27,12 @@ const Connection: React.FC = () => {
     display: false,
   });
   const [userdata, setUserdata] = useState("");
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
+  // const [user, setUser] = useState({
+  //   email: "",
+  //   password: "",
+  // });
 
-  const { email, password } = user;
+  // const { email, password } = user;
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -43,6 +43,7 @@ const Connection: React.FC = () => {
   };
 
   const Connect = () => {
+    fetchGet();
     if (validationEmail.valid) {
       console.log("Vous vous êtes connecté avec succès");
       navigate(Routes.profil);
@@ -50,17 +51,13 @@ const Connection: React.FC = () => {
     } else console.log("Corrigez les erreurs dans le formulaire");
   };
 
-  useEffect(() => {
-    fetchGet();
-  }, []);
-
   const fetchGet = async () => {
     await axios
-      .get(`/users/profile`)
+      .get(`users`)
       .then((response) => setUserdata(response.data))
       .catch((err) => console.error(err));
 
-    console.log(userdata);
+    console.log("userdata " + userdata);
   };
 
   return (

@@ -39,3 +39,13 @@ export const getUser = async (email: string) => {
 
   return null;
 };
+
+export const getUsers = async () => {
+  const results = await knex<User>(table).select("*");
+
+  if (results && results.length) {
+    return humps.camelizeKeys(results[0]) as UserCamel;
+  }
+
+  return null;
+};

@@ -26,15 +26,15 @@ type SignUpResponse = {
 };
 
 const Inscription: React.FC = () => {
-  const [{ data, loading, error }, signup] = useAxios<SignUpResponse>(
-    {
-      url: "/api/signup",
-      method: "POST",
-    },
-    {
-      manual: true,
-    }
-  );
+  // const [{ data, loading, error }, signup] = useAxios<SignUpResponse>(
+  //   {
+  //     url: "/api/signup",
+  //     method: "POST",
+  //   },
+  //   {
+  //     manual: true,
+  //   }
+  // );
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
@@ -101,7 +101,7 @@ const Inscription: React.FC = () => {
         validationPreNom.valid &&
         validationEmail.valid
       ) {
-        signup();
+        // signup();
         navigate(Routes.connection);
       } else console.log("Corrigez les erreurs dans le formulaire");
     } else console.log("passwords ne corresponds pas");

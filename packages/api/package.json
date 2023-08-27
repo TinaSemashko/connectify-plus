@@ -25,7 +25,8 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
-    "@types/humps": "^2.0.3"
+    "@types/humps": "^2.0.3",
+    "@types/pg": "^8.10.2"
   },
   "scripts": {
     "start": "nodemon index.ts",
