@@ -5,9 +5,6 @@ const knexConfig = {
   client: "pg",
   connection: {
     connectionString: dbConnection,
-    ssl: {
-      rejectUnauthorized: false,
-    },
   },
   pool: { min: dbPoolMin, max: dbPoolMax },
 };

@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
-import fdaccueil from "../movie/fdaccueil.mp4";
 import { Box, Button, TextField, Typography } from "@mui/material";
+import { useSnackbar } from "notistack";
+import { Validate, ValidationGroup } from "mui-validate";
+import axios from "../axios";
 import ImgContact from "../images/contact.jpg";
 import Img1 from "../images/img1.jpg";
 import Img2 from "../images/img2.jpg";
+import FormContact from "../components/formContact/formContact";
+import fdaccueil from "../movie/fdaccueil.mp4";
 
 import * as S from "./home.styled";
-import FormContact from "../components/formContact/formContact";
-import { Validate, ValidationGroup } from "mui-validate";
 
 const translations = {
   fr: "Bienvenue",
@@ -18,23 +20,61 @@ const translations = {
 };
 
 const Home: React.FC = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const [validationEmail, setValidationEmail] = useState({
     valid: false,
     messages: [],
     display: false,
   });
 
+  const [userAbonnement, setUserAbonnement] = useState("");
+  const [userId, setUserId] = useState(0);
+
+  const onInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setUserAbonnement(event.target?.value);
+  };
+
+  const showError = (err: Error) => {
+    enqueueSnackbar("Il n'y a pas d'utilisateur avec un tel email", {
+      variant: "error",
+    });
+    console.error(err);
+  };
+
+  const fetchPut = async () => {
+    const requestData = {
+      email: userAbonnement,
+    };
+
+    await axios
+      .put(`abonnement`, requestData)
+      .then((response) => {
+        setUserId(response.data.results);
+      })
+      .catch((err) => {
+        showError(err);
+      });
+  };
+
   const addAbonement = () => {
-    console.log("validationEmail", validationEmail);
     if (validationEmail.valid) {
-      console.log("Votre message est envoyé");
-      //modal fenetre
-    } else console.log("Corrigez les erreurs dans le formulaire");
+      fetchPut();
+    } else
+      enqueueSnackbar("Corrigez les erreurs dans le formulaire", {
+        variant: "error",
+      });
   };
 
   useEffect(() => {
-    addAbonement();
-  }, []);
+    console.log(userId);
+    if (userId) {
+      enqueueSnackbar("Vous avez abonné avec succès", {
+        variant: "success",
+      });
+    }
+  }, [userId]);
 
   useEffect(() => {
     const changeLanguage = () => {
@@ -50,7 +90,6 @@ const Home: React.FC = () => {
           1) %
         languages.length;
       const nextLanguage = languages[nextIndex].toString();
-      console.log(nextLanguage);
 
       if (welcomeText)
         welcomeText.innerHTML =
@@ -202,6 +241,9 @@ const Home: React.FC = () => {
                       type="text"
                       placeholder="Entrez votre email..."
                       fullWidth
+                      name="email"
+                      value={userAbonnement}
+                      onChange={(e) => onInputChange(e)}
                     />
                   </S.TextFieldContainer>
                 </Validate>

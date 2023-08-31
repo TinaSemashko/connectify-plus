@@ -1,15 +1,17 @@
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { Box, Button, Typography } from "@mui/material";
 import { Validate, ValidationGroup } from "mui-validate";
+import { useSnackbar } from "notistack";
 
 import * as S from "../../pages/contact.styled";
-import { useEffect, useState } from "react";
 
 type Props = {
   widthSpace: boolean;
 };
 
 const Contact: React.FC<Props> = ({ widthSpace }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const [validationEmail, setValidationEmail] = useState({
     valid: false,
     messages: [],
@@ -34,19 +36,18 @@ const Contact: React.FC<Props> = ({ widthSpace }) => {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setMessageBox({ ...messageBox, [event.target?.name]: event.target?.value });
-    // console.log(messageBox);
   };
 
   const addMessage = () => {
     if (validationEmail.valid && validationSujet.valid) {
-      console.log("Votre message est envoyé");
-      //modal fenetre
-    } else console.log("Corrigez les erreurs dans le formulaire");
+      enqueueSnackbar("Votre message est envoyé avec succès", {
+        variant: "success",
+      });
+    } else
+      enqueueSnackbar("Corrigez les erreurs dans le formulaire", {
+        variant: "error",
+      });
   };
-
-  useEffect(() => {
-    addMessage();
-  }, []);
 
   return (
     <S.Col2>
@@ -119,8 +120,8 @@ const Contact: React.FC<Props> = ({ widthSpace }) => {
                   <Validate
                     name="sujet"
                     custom={[
-                      (value) => value.length <= 10,
-                      "Sujet ne peut pas être 10 characters",
+                      (value) => value.length <= 10 && value.length > 0,
+                      "Sujet ne peut pas être plus long que 10 characters ou vide",
                     ]}
                     after={(result: any) => setValidationSujet(result)}
                   >

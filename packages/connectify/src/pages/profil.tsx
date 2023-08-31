@@ -1,6 +1,7 @@
 import Imgprofil from "../images/profile1.jpg";
 import Photo from "../images/photo.jpg";
-
+import Cookies from "js-cookie";
+import { Typography } from "@mui/material";
 import { FilterItems } from "../constants/filteritems";
 import Wall from "./wall";
 import Gallery from "./gallery";
@@ -9,7 +10,6 @@ import Music from "./music";
 import { useState } from "react";
 
 import * as S from "./profil.styled";
-import { Typography } from "@mui/material";
 
 const filterItemsArray = Object.values(FilterItems);
 
@@ -18,6 +18,8 @@ const Profil: React.FC = () => {
   const [hiddenGallery, setHiddenGallery] = useState(false);
   const [hiddenVideo, setHiddenVideo] = useState(false);
   const [hiddenMusic, setHiddenMusic] = useState(false);
+  const userdataNom = Cookies.get("COOKIS_USER_NAME");
+  const userdataPreNom = Cookies.get("COOKIS_USER_SURNAME");
 
   const filter = (item: string) => {
     switch (item) {
@@ -66,10 +68,10 @@ const Profil: React.FC = () => {
         <S.ContUser>
           <S.Img1 src={Photo} alt="" />
           <Typography variant="h3" sx={{ color: "colorWhite.main" }}>
-            NOM
+            {userdataNom === "" ? "NOM" : userdataNom}
           </Typography>
           <Typography variant="h3" sx={{ color: "colorWhite.main" }}>
-            PRENOM
+            {userdataPreNom === "" ? "PRENOM" : userdataPreNom}
           </Typography>
         </S.ContUser>
       </S.ContImage>

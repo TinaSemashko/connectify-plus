@@ -1,7 +1,8 @@
 import Topbar from "../shared/topbar/topbar";
-import { AppRoutes } from "./appRoutes";
 import { ThemeProvider, createTheme, responsiveFontSizes } from "@mui/material";
+import { SnackbarProvider } from "notistack";
 import Footer from "../shared/footer/footer";
+import { AppRoutes } from "./appRoutes";
 
 declare module "@mui/material/styles" {
   interface Palette {
@@ -70,14 +71,14 @@ export let theme = createTheme({
 });
 theme = responsiveFontSizes(theme);
 
-function App() {
-  return (
-    <ThemeProvider theme={responsiveFontSizes(theme)}>
-      <Topbar />
+const App: React.FC = () => (
+  <ThemeProvider theme={responsiveFontSizes(theme)}>
+    <Topbar />
+    <SnackbarProvider>
       <AppRoutes />
-      <Footer />
-    </ThemeProvider>
-  );
-}
+    </SnackbarProvider>
+    <Footer />
+  </ThemeProvider>
+);
 
 export default App;

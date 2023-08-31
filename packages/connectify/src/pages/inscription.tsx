@@ -12,30 +12,19 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-
-import * as S from "./inscription.styled";
+import { useSnackbar } from "notistack";
+import axios from "../axios";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useEffect, useState } from "react";
-import useAxios from "axios-hooks";
+import { useCallback, useEffect, useState } from "react";
 import { Validate, ValidationGroup } from "mui-validate";
 import { useNavigate } from "react-router";
 import { Routes } from "../app/routes";
 
-type SignUpResponse = {
-  success: boolean;
-};
+import * as S from "./inscription.styled";
 
 const Inscription: React.FC = () => {
-  // const [{ data, loading, error }, signup] = useAxios<SignUpResponse>(
-  //   {
-  //     url: "/api/signup",
-  //     method: "POST",
-  //   },
-  //   {
-  //     manual: true,
-  //   }
-  // );
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -68,11 +57,13 @@ const Inscription: React.FC = () => {
     nom: "",
     prenom: "",
     email: "",
-    gender: "",
+    genre: "",
     password: "",
+    abonnement: false,
   });
 
-  const { nom, prenom, email, gender, password } = user;
+  const { nom, prenom, email, genre, password, abonnement } = user;
+  const [newUserId, setNewUserId] = useState(0);
 
   const onInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -88,24 +79,57 @@ const Inscription: React.FC = () => {
     console.log(password2);
   };
 
+  const showError = (err: Error) => {
+    enqueueSnackbar("Quelque shose ne va pas", { variant: "error" });
+    console.error(err);
+  };
+
+  const fetchPost = async () => {
+    const request = {
+      data: user,
+    };
+    await axios
+      .post(`create`, request)
+      .then((response) => setNewUserId(response.data.results))
+      .catch((err) => {
+        showError(err);
+      });
+  };
+
   useEffect(() => {
     if (password2 === user.password) setIsPasswordTrue(true);
     else setIsPasswordTrue(false);
-    console.log(isPasswordTrue);
+    console.log("isPasswordTrue " + isPasswordTrue);
   }, [password2]);
 
-  const addUser = () => {
+  const addUser = async () => {
     if (isPasswordTrue) {
       if (
         validationNom.valid &&
         validationPreNom.valid &&
         validationEmail.valid
       ) {
-        // signup();
-        navigate(Routes.connection);
-      } else console.log("Corrigez les erreurs dans le formulaire");
-    } else console.log("passwords ne corresponds pas");
+        fetchPost();
+      } else
+        enqueueSnackbar("Corrigez les erreurs dans le formulaire", {
+          variant: "error",
+        });
+    } else
+      enqueueSnackbar("Passwords ne corresponds pas", {
+        variant: "error",
+      });
   };
+
+  const Redirect = useCallback(() => {
+    enqueueSnackbar("L'utilisateur est créé avec succès", {
+      variant: "success",
+    });
+    navigate(Routes.connection);
+  }, [navigate]);
+
+  useEffect(() => {
+    if (newUserId) Redirect();
+  }, [newUserId, Redirect]);
 
   return (
     <S.MainContainer>
@@ -250,12 +274,12 @@ const Inscription: React.FC = () => {
                   </div>
                   <FormControl>
                     <S.RadioButton>
-                      <div>Gendre&nbsp;&nbsp;</div>
+                      <div>Genre&nbsp;&nbsp;</div>
                       <RadioGroup
                         row
                         aria-labelledby="radio-buttons"
-                        name="gender"
-                        value={gender}
+                        name="genre"
+                        value={genre}
                         onChange={(e) => onInputChange(e)}
                         sx={{
                           color: "colorWhite.main",
@@ -265,7 +289,7 @@ const Inscription: React.FC = () => {
                         }}
                       >
                         <FormControlLabel
-                          value="female"
+                          value="femme"
                           control={
                             <Radio
                               sx={{
@@ -279,7 +303,7 @@ const Inscription: React.FC = () => {
                           label="Femme"
                         />
                         <FormControlLabel
-                          value="male"
+                          value="homme"
                           control={
                             <Radio
                               sx={{

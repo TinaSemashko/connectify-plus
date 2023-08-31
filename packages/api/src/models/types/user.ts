@@ -6,6 +6,7 @@ export type User = {
   id_genre: number;
   email: string;
   password: string;
+  abonnement: boolean;
 };
 
 // our type after we run through Humps
@@ -16,4 +17,5 @@ export type UserCamel = {
   idGenre: number;
   email: string;
   password: string;
+  abonnement: boolean;
 };

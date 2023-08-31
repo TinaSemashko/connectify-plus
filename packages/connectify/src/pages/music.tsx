@@ -72,7 +72,7 @@ const Music: React.FC<Props> = ({ hidden = false }) => {
       </Typography>
       <S.Audio>
         {ArrMusic.map((item, index) => (
-          <Card sx={{ display: "flex", mb: 6 }}>
+          <Card sx={{ display: "flex", mb: 6 }} key={index}>
             <CardMedia
               component="img"
               sx={{ width: "20vw" }}

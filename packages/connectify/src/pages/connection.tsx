@@ -1,4 +1,4 @@
-import ImgConnection from "../images/connection.jpg";
+import { useCallback, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import {
@@ -10,29 +10,45 @@ import {
   Typography,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { useEffect, useState } from "react";
-import { Routes } from "./../app/routes";
+import axios from "../axios";
 import { useNavigate } from "react-router";
 import { Validate, ValidationGroup } from "mui-validate";
+import Cookies from "js-cookie";
+import { useSnackbar } from "notistack";
+import { Routes } from "./../app/routes";
+import ImgConnection from "../images/connection.jpg";
 
 import * as S from "./connection.styled";
-import axios from "axios";
+
+interface User {
+  id: number;
+  nom: string;
+  prenom: string;
+  genre: string;
+  email: string;
+  password: string;
+  abonnement: boolean;
+}
+
+Cookies.set("COOKIS_USER_NAME", "Nom");
+Cookies.set("COOKIS_USER_SURNAME", "Prenom");
 
 const Connection: React.FC = () => {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const [showPassword, setShowPassword] = useState(false);
   const [validationEmail, setValidationEmail] = useState({
     valid: false,
     messages: [],
     display: false,
   });
-  const [userdata, setUserdata] = useState("");
-  // const [user, setUser] = useState({
-  //   email: "",
-  //   password: "",
-  // });
+  const [userdata, setUserdata] = useState<User>();
+  const [user, setUser] = useState({
+    email: "",
+    password: "",
+  });
 
-  // const { email, password } = user;
+  const { email, password } = user;
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -42,23 +58,65 @@ const Connection: React.FC = () => {
     event.preventDefault();
   };
 
+  const onInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setUser({
+      ...user,
+      [event.target?.name]: event.target?.value,
+    });
+  };
+
   const Connect = () => {
-    fetchGet();
     if (validationEmail.valid) {
-      console.log("Vous vous êtes connecté avec succès");
-      navigate(Routes.profil);
-      //modal fenetre
-    } else console.log("Corrigez les erreurs dans le formulaire");
+      fetchGet();
+    } else
+      enqueueSnackbar("Corrigez les erreurs dans le formulaire", {
+        variant: "error",
+      });
+  };
+
+  const Redirect = useCallback(() => {
+    enqueueSnackbar("Vous êtes connecté avec succès", {
+      variant: "success",
+    });
+    navigate(Routes.profil);
+  }, [navigate]);
+
+  const showError = (err: Error) => {
+    enqueueSnackbar(
+      "Il n'y a pas d'utilisateur avec un tel login et mot de passe",
+      { variant: "error" }
+    );
+    console.error(err);
   };
 
   const fetchGet = async () => {
+    const request = {
+      params: {
+        email: user.email,
+        password: user.password,
+      },
+    };
     await axios
-      .get(`users`)
-      .then((response) => setUserdata(response.data))
-      .catch((err) => console.error(err));
-
-    console.log("userdata " + userdata);
+      .get(`user`, request)
+      .then((response) => {
+        setUserdata(response.data.results[0] as User);
+      })
+      .catch((err) => {
+        showError(err);
+      });
   };
+
+  useEffect(() => {
+    if (userdata) {
+      const userdataNom = userdata === undefined ? "" : userdata.nom;
+      const userdataPreNom = userdata === undefined ? "" : userdata.prenom;
+      Cookies.set("COOKIS_USER_NAME", userdataNom);
+      Cookies.set("COOKIS_USER_SURNAME", userdataPreNom);
+      Redirect();
+    }
+  }, [userdata, Redirect]);
 
   return (
     <S.MainContainer>
@@ -88,7 +146,7 @@ const Connection: React.FC = () => {
                   },
                 }}
                 noValidate
-                autoComplete="off"
+                autoComplete={"off"}
               >
                 <S.BoxForm>
                   <Typography
@@ -115,6 +173,9 @@ const Connection: React.FC = () => {
                         type="text"
                         placeholder="Entrez votre email..."
                         fullWidth
+                        name="email"
+                        value={email}
+                        onChange={(e) => onInputChange(e)}
                       />
                     </S.ContainerEmail>
                   </Validate>
@@ -141,7 +202,11 @@ const Connection: React.FC = () => {
                     <FilledInput
                       id="filled-adornment-password"
                       type={showPassword ? "text" : "password"}
+                      autoComplete="new-password"
                       placeholder="Entrez votre mot de passe..."
+                      name="password"
+                      value={password}
+                      onChange={(e) => onInputChange(e)}
                       endAdornment={
                         <InputAdornment position="end">
                           <IconButton
