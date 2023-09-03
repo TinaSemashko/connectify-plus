@@ -64,7 +64,9 @@ const Profil: React.FC = () => {
   return (
     <S.MainContainer>
       <S.ContImage>
-        <S.Img src={Imgprofil} alt="ImgConnection" />
+        <S.Imgcontainer>
+          <S.Img src={Imgprofil} alt="ImgConnection" />
+        </S.Imgcontainer>
         <S.ContUser>
           <S.Img1 src={Photo} alt="" />
           <Typography variant="h3" sx={{ color: "colorWhite.main" }}>

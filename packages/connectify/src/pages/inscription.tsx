@@ -169,8 +169,8 @@ const Inscription: React.FC = () => {
                   <Box
                     sx={{
                       display: "flex",
-                      justifyContent: "flex-start",
-                      alignItems: "start",
+                      justifyContent: "space-evenly",
+                      alignItems: "center",
                     }}
                   >
                     <Typography
@@ -178,17 +178,17 @@ const Inscription: React.FC = () => {
                       variant="body1"
                       color="colorWhite.main"
                       textAlign="left"
-                      paddingRight="9rem"
+                      // paddingRight="9rem"
                     >
                       Nom :
                     </Typography>
-
+                    <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                     <Typography
                       noWrap
                       variant="body1"
                       color="colorWhite.main"
                       textAlign="left"
-                      paddingRight="7rem"
+                      // paddingRight="7rem"
                     >
                       Prénom :
                     </Typography>
@@ -210,7 +210,7 @@ const Inscription: React.FC = () => {
                         type="text"
                         placeholder="Entrez votre nom..."
                         sx={{
-                          width: "12vw",
+                          width: { xs: "24vw", md: "12vw" },
                         }}
                         name="nom"
                         value={nom}
@@ -231,7 +231,7 @@ const Inscription: React.FC = () => {
                         type="text"
                         placeholder="Entrez votre prénom.."
                         sx={{
-                          width: "12vw",
+                          width: { xs: "24vw", md: "12vw" },
                         }}
                         name="prenom"
                         value={prenom}
@@ -244,7 +244,6 @@ const Inscription: React.FC = () => {
                     variant="body1"
                     color="colorWhite.main"
                     textAlign="left"
-                    paddingRight="20rem"
                   >
                     Email :
                   </Typography>
@@ -264,7 +263,7 @@ const Inscription: React.FC = () => {
                         placeholder="Entrez votre email..."
                         fullWidth
                         sx={{
-                          width: "25vw",
+                          width: { xs: "50vw", md: "25vw" },
                         }}
                         name="email"
                         value={email}
@@ -274,7 +273,10 @@ const Inscription: React.FC = () => {
                   </div>
                   <FormControl>
                     <S.RadioButton>
-                      <div>Genre&nbsp;&nbsp;</div>
+                      <div>
+                        Genre&nbsp;&nbsp;
+                        <br />
+                      </div>
                       <RadioGroup
                         row
                         aria-labelledby="radio-buttons"
@@ -283,6 +285,7 @@ const Inscription: React.FC = () => {
                         onChange={(e) => onInputChange(e)}
                         sx={{
                           color: "colorWhite.main",
+                          display: "block",
                           "&.Mui-checked": {
                             color: "colorWhite.main",
                           },
@@ -335,14 +338,13 @@ const Inscription: React.FC = () => {
                     variant="body1"
                     color="colorWhite.main"
                     textAlign="left"
-                    paddingRight="16rem"
                   >
                     Mot de passe :
                   </Typography>
                   <FormControl
                     sx={{
                       m: 1,
-                      width: "25vw",
+                      width: { xs: "50vw", md: "25vw" },
                       borderRadius: "10px",
                       borderBlockColor: "colorWhite.main",
                       backgroundColor: "colorWhite.main",
@@ -376,14 +378,13 @@ const Inscription: React.FC = () => {
                     variant="body1"
                     color="colorWhite.main"
                     textAlign="left"
-                    paddingRight="9rem"
                   >
                     Vérification de mot de passe :
                   </Typography>
                   <FormControl
                     sx={{
                       m: 1,
-                      width: "25vw",
+                      width: { xs: "50vw", md: "25vw" },
                       borderRadius: "10px",
                       borderBlockColor: "colorWhite.main",
                       backgroundColor: "colorWhite.main",
@@ -423,7 +424,7 @@ const Inscription: React.FC = () => {
                     sx={{
                       color: "colorWhite.main",
                       borderRadius: "10px",
-                      width: "10vw",
+                      width: { xs: "20vw", md: "10vw" },
                     }}
                   >
                     Valider

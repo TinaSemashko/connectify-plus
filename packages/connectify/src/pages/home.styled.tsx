@@ -1,16 +1,21 @@
 import { styled } from "@mui/material/styles";
 
 export const MainContainer = styled("div")`
-  /* height: calc(100vh - 20vh); */
   display: grid;
   grid-template-columns: 50vw 50vw;
   grid-template-rows: auto;
   justify-items: center;
+
+  @media (max-width: 750px) {
+    grid-template-columns: 100vw;
+    align-items: center;
+  }
 `;
 
 export const Cell12 = styled("div")`
   grid-column: 1 / span 2;
-
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 50% 50%;
@@ -19,8 +24,16 @@ export const Cell12 = styled("div")`
 
   video {
     width: 100%;
+    height: 100%;
     grid-column: 1;
     grid-row: 1 / span 2;
+    object-fit: cover;
+
+    @media (max-width: 750px) {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
   }
 
   .text12 {
@@ -46,6 +59,12 @@ export const Cell12 = styled("div")`
   }
 `;
 
+export const Videocontainer = styled("div")`
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  height: 100vh;
+`;
+
 export const FormInscr = styled("div")`
   grid-column: 1;
   grid-row: 1 / span 2;
@@ -54,6 +73,11 @@ export const FormInscr = styled("div")`
   text-align: center;
   border-radius: 20px;
   padding: 4vh;
+
+  @media (max-width: 750px) {
+    width: 80%;
+    height: 50vh;
+  }
 `;
 
 export const Cell31 = styled("div")`
@@ -64,9 +88,35 @@ export const Cell31 = styled("div")`
   padding: 0;
 `;
 
+export const Cell311 = styled("div")`
+  grid-column: 1;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  @media (max-width: 750px) {
+    display: none;
+  }
+`;
+
+export const Cell312 = styled("div")`
+  grid-column: 1;
+  width: 100vw;
+  display: none;
+
+  @media (max-width: 750px) {
+    display: block;
+  }
+`;
+
 export const Cell32 = styled("div")`
   grid-column: 2;
   height: 100vh;
+
+  @media (max-width: 750px) {
+    grid-column: 1;
+  }
 `;
 
 export const Img = styled("img")`
@@ -74,6 +124,10 @@ export const Img = styled("img")`
   height: 100%;
   flex-shrink: 0;
   object-fit: cover;
+
+  @media (max-width: 750px) {
+    width: 100vw;
+  }
 `;
 
 export const Texts = styled("div")`
@@ -84,6 +138,11 @@ export const Texts = styled("div")`
   padding-right: 8vw;
   line-height: 4;
   color: ${({ theme }) => theme.palette.secondary.main};
+
+  @media (max-width: 750px) {
+    width: 100vw;
+    text-align: center;
+  }
 `;
 
 export const BoxContactForm = styled("div")`

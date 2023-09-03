@@ -138,7 +138,7 @@ const Connection: React.FC = () => {
                 sx={{
                   "& .MuiTextField-root": {
                     m: 1,
-                    width: "25vw",
+                    width: { xs: "50vw", md: "25vw" },
                     borderRadius: "10px",
                     borderBlockColor: "colorWhite.main",
                     backgroundColor: "colorWhite.main",
@@ -191,7 +191,7 @@ const Connection: React.FC = () => {
                   <FormControl
                     sx={{
                       m: 1,
-                      width: "25vw",
+                      width: { xs: "50vw", md: "25vw" },
                       borderRadius: "10px",
                       borderBlockColor: "colorWhite.main",
                       backgroundColor: "colorWhite.main",
@@ -231,7 +231,7 @@ const Connection: React.FC = () => {
                     sx={{
                       color: "colorWhite.main",
                       borderRadius: "10px",
-                      width: "10vw",
+                      width: { xs: "30vw", md: "15vw" },
                     }}
                   >
                     Se Connecter

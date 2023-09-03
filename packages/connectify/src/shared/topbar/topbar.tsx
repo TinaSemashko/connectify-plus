@@ -59,7 +59,6 @@ const TopBar: React.FC = () => {
         textAlign: "center",
         backgroundColor: "lightGreen.main",
         height: "100%",
-        width: "100%",
       }}
     >
       <S.CloseIconStyle>
@@ -69,20 +68,37 @@ const TopBar: React.FC = () => {
         <CloseIcon sx={{ fontSize: "2rem" }} />
       </S.CloseIconStyle>
 
-      <Typography variant="h6" sx={{ my: 2 }}>
+      <Typography
+        variant="h3"
+        fontSize="13vw"
+        sx={{ my: 2, color: "secondary.main" }}
+      >
         Connectify
       </Typography>
       <Divider />
-      <List>
+      <List
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
+        }}
+      >
         {menuItemsArray.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton
               selected={isSelected(item)}
-              sx={{ textAlign: "center" }}
+              sx={{
+                textAlign: "center",
+                color: "colorWhite.main",
+              }}
             >
               <ListItemText
                 primary={item === MenuItemsConnect.HOME ? "accueil" : item}
                 onClick={() => navigate(Routes[item as keyof typeof Routes])}
+                primaryTypographyProps={{
+                  fontSize: "12vw",
+                  textTransform: "capitalize",
+                }}
               />
             </ListItemButton>
           </ListItem>
@@ -109,13 +125,22 @@ const TopBar: React.FC = () => {
           boxShadow: "none",
         }}
       >
-        <Toolbar>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "end",
+            width: "100%",
+          }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            edge="start"
+            edge="end"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{
+              mr: 2,
+              display: { sm: "none" },
+            }}
           >
             <MenuIcon />
           </IconButton>
@@ -167,6 +192,7 @@ const TopBar: React.FC = () => {
       </AppBar>
       <Box component="nav">
         <Drawer
+          anchor="right"
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}

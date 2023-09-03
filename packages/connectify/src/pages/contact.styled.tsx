@@ -4,6 +4,12 @@ export const MainContainer = styled("div")`
   display: flex;
   justify-content: space-between;
   width: 100%;
+
+  /* @media (max-width: 750px) {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  } */
 `;
 
 export const Img = styled("img")`
@@ -26,6 +32,10 @@ export const ContForm = styled("div")<{ widthSpace: boolean }>`
   background-color: ${({ theme }) => theme.palette.secondGreen.main};
   text-align: center;
   border-radius: 5%;
+
+  @media (max-width: 750px) {
+    width: 80vw;
+  }
 `;
 
 export const BoxForm = styled("div")`

@@ -12,6 +12,10 @@ export const GridCadre = styled("div")`
   flex-direction: column;
   justify-content: space-between;
   padding-top: 4vh;
+
+  @media (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
 export const GridImg = styled("div")`
@@ -28,6 +32,10 @@ export const GridImg = styled("div")`
   border-radius: 16px;
   box-shadow: 0px 4px 4px grey;
   margin-bottom: 4vh;
+
+  @media (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
 export const Img = styled("img")`
@@ -66,5 +74,9 @@ export const GridSendBox = styled("div")`
 
   .icon {
     transform: rotate(-40deg);
+  }
+
+  @media (max-width: 750px) {
+    width: 100%;
   }
 `;

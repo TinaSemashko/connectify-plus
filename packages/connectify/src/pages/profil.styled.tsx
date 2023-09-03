@@ -6,6 +6,7 @@ export const MainContainer = styled("div")`
   flex-direction: column;
   justify-content: space-between;
 `;
+
 export const ContImage = styled("div")`
   display: grid;
   grid-template-columns: 1fr;
@@ -20,6 +21,10 @@ export const Img = styled("img")`
 
   grid-column: 1;
   width: 100vw;
+
+  @media (max-width: 750px) {
+    height: 100%;
+  }
 `;
 
 export const ContUser = styled("div")`
@@ -34,11 +39,30 @@ export const ContUser = styled("div")`
   height: 50%;
 
   z-index: 10;
+
+  @media (max-width: 750px) {
+    flex-direction: column;
+    width: 80%;
+    padding-top: 5vh;
+    margin-top: 5vh;
+    height: 80%;
+    box-shadow: 0px 4px 4px black;
+  }
+`;
+
+export const Imgcontainer = styled("div")`
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  height: 50vh;
 `;
 
 export const Img1 = styled("img")`
   width: 15vw;
   border-radius: 50%;
+
+  @media (max-width: 750px) {
+    width: 30vw;
+  }
 `;
 
 export const ContContent = styled("div")`
@@ -46,6 +70,10 @@ export const ContContent = styled("div")`
   grid-template-columns: 20% 80%;
   grid-template-rows: auto;
   overflow-x: hidden;
+
+  @media (max-width: 750px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const Filter = styled("div")`
@@ -62,6 +90,11 @@ export const Filter = styled("div")`
   align-self: start;
   top: 1rem;
   left: 1rem;
+
+  @media (max-width: 750px) {
+    flex-direction: row;
+    justify-content: center;
+  }
 `;
 
 export const MyButton = styled(Button)`
@@ -77,4 +110,10 @@ export const MyButton = styled(Button)`
 export const Wall = styled("div")`
   grid-column: 2;
   height: 100vh;
+
+  @media (max-width: 750px) {
+    grid-column: 1;
+    align-items: center;
+    text-align: center;
+  }
 `;

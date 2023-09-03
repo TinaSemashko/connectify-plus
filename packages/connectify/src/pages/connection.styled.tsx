@@ -4,12 +4,22 @@ export const MainContainer = styled("div")`
   display: flex;
   justify-content: space-between;
   width: 100%;
+
+  @media (max-width: 750px) {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
 `;
 
 export const Img = styled("img")`
   width: 50%;
   height: calc(100vh - 10vh);
   z-index: 1;
+
+  @media (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
 export const Col2 = styled("div")`
@@ -21,6 +31,10 @@ export const Col2 = styled("div")`
   align-items: center;
   padding-top: 4vh;
   z-index: 2;
+
+  @media (max-width: 750px) {
+    width: 100%;
+  }
 `;
 
 export const ContForm = styled("div")`

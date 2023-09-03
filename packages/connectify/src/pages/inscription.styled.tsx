@@ -4,11 +4,21 @@ export const MainContainer = styled("div")`
   display: flex;
   justify-content: space-between;
   width: 100%;
+
+  @media (max-width: 1100px) {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
 `;
 
 export const Img = styled("img")`
   width: 80vw;
   height: calc(100vh - 10vh);
+
+  @media (max-width: 1100px) {
+    width: 100vw;
+  }
 `;
 
 export const Col2 = styled("div")`
@@ -41,4 +51,8 @@ export const RadioButton = styled("div")`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+
+  @media (max-width: 1100px) {
+    display: block;
+  }
 `;

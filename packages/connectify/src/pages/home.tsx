@@ -107,7 +107,9 @@ const Home: React.FC = () => {
   return (
     <S.MainContainer>
       <S.Cell12>
-        <video src={fdaccueil} autoPlay loop muted />
+        <S.Videocontainer>
+          <video src={fdaccueil} autoPlay loop muted />
+        </S.Videocontainer>
         <Typography variant="h1" className="text12" sx={{ opacity: 0.8 }}>
           Connectify
         </Typography>
@@ -117,13 +119,16 @@ const Home: React.FC = () => {
           backgroundColor: "secondary.main",
         }}
       >
-        <video src={fdaccueil} muted className="video22" />
+        <S.Videocontainer>
+          <video src={fdaccueil} muted className="video22" />
+        </S.Videocontainer>
         <div className="text22">
           <Typography
             variant="h2"
             color="secondGreen.main"
             id="welcome-text"
             fontFamily="'Yeseva One', cursive"
+            textAlign="center"
           >
             Bienvenue
           </Typography>
@@ -132,9 +137,9 @@ const Home: React.FC = () => {
           </Typography>
         </div>
       </S.Cell12>
-      <S.Cell31>
+      <S.Cell311>
         <S.Img src={Img1} alt="Img1" />
-      </S.Cell31>
+      </S.Cell311>
       <S.Cell32 sx={{ backgroundColor: "lightGreen.main" }}>
         <S.Texts>
           <Typography variant="h5" sx={{ pt: 8 }}>
@@ -157,6 +162,9 @@ const Home: React.FC = () => {
           </Typography>
         </S.Texts>
       </S.Cell32>
+      <S.Cell312>
+        <S.Img src={Img1} alt="Img1" />
+      </S.Cell312>
       <S.Cell31 sx={{ backgroundColor: "secondGreen.main" }}>
         <S.Texts>
           <Typography variant="h5" sx={{ pt: 8 }}>
@@ -177,9 +185,9 @@ const Home: React.FC = () => {
       <S.Cell32>
         <S.Img src={Img2} alt="Img2" />
       </S.Cell32>
-      <S.Cell31>
+      <S.Cell311>
         <S.Img src={ImgContact} alt="ImgConnection" />
-      </S.Cell31>
+      </S.Cell311>
       <S.Cell32 sx={{ backgroundColor: "lightGreen.main" }}>
         <S.Texts>
           <S.BoxContactForm>
@@ -188,7 +196,9 @@ const Home: React.FC = () => {
         </S.Texts>
       </S.Cell32>
       <S.Cell12>
-        <video src={fdaccueil} muted className="videoblur" />
+        <S.Videocontainer>
+          <video src={fdaccueil} muted className="videoblur" />
+        </S.Videocontainer>
         <S.FormInscr>
           <Typography
             variant="h4"
@@ -216,7 +226,7 @@ const Home: React.FC = () => {
                 sx={{
                   "& .MuiTextField-root": {
                     m: 1,
-                    width: "25vw",
+                    width: { xs: "50vw", md: "25vw" },
                     borderRadius: "10px",
                     borderBlockColor: "colorWhite.main",
                     backgroundColor: "colorWhite.main",

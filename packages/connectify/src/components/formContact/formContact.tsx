@@ -68,7 +68,7 @@ const Contact: React.FC<Props> = ({ widthSpace }) => {
               sx={{
                 "& .MuiTextField-root": {
                   m: 1,
-                  width: "25vw",
+                  width: { xs: "50vw", md: "25vw" },
                   borderRadius: "10px",
                   borderBlockColor: "colorWhite.main",
                   backgroundColor: "colorWhite.main",
@@ -83,7 +83,6 @@ const Contact: React.FC<Props> = ({ widthSpace }) => {
                   variant="body1"
                   color="colorWhite.main"
                   textAlign="left"
-                  paddingRight="20rem"
                 >
                   Email :
                 </Typography>
@@ -112,7 +111,6 @@ const Contact: React.FC<Props> = ({ widthSpace }) => {
                   variant="body1"
                   color="colorWhite.main"
                   textAlign="left"
-                  paddingRight="20rem"
                 >
                   Sujet :
                 </Typography>
@@ -141,7 +139,6 @@ const Contact: React.FC<Props> = ({ widthSpace }) => {
                   variant="body1"
                   color="colorWhite.main"
                   textAlign="left"
-                  paddingRight="18rem"
                 >
                   Message :
                 </Typography>
@@ -156,6 +153,7 @@ const Contact: React.FC<Props> = ({ widthSpace }) => {
                   name="message"
                   value={message}
                   onChange={(e) => onInputChange(e)}
+                  sx={{ width: { xs: "50vw", md: "25vw" } }}
                 />
                 <br />
                 <br />

@@ -102,7 +102,7 @@ const Wall: React.FC<Props> = ({ hidden = false }) => {
           sx={{
             border: "none",
             "& fieldset": { border: "none" },
-            width: "10vw",
+            width: { xs: "20vw", md: "10vw" },
             textAlign: "left",
           }}
           InputProps={{
