@@ -17,9 +17,6 @@ export const ContImage = styled("div")`
 `;
 
 export const Img = styled("img")`
-  grid-row: 1 / span 2;
-
-  grid-column: 1;
   width: 100vw;
 
   @media (max-width: 750px) {
@@ -36,9 +33,28 @@ export const ContUser = styled("div")`
   justify-content: space-around;
   align-items: center;
   width: 80%;
-  height: 50%;
+  height: 50vh;
+  margin-top: 15vh;
 
   z-index: 10;
+
+  @media (max-width: 1400px) {
+    margin-top: 5vh;
+    height: 60%;
+  }
+
+  @media (max-width: 1300px) {
+    margin-top: 3vh;
+  }
+
+  @media (max-width: 1200px) {
+    margin-top: 0vh;
+  }
+
+  @media (max-width: 1100px) {
+    margin-top: 0vh;
+    height: 50%;
+  }
 
   @media (max-width: 750px) {
     flex-direction: column;
@@ -53,7 +69,11 @@ export const ContUser = styled("div")`
 export const Imgcontainer = styled("div")`
   grid-column: 1;
   grid-row: 1 / span 2;
-  height: 50vh;
+  /* height: 80vh; */
+
+  @media (max-width: 750px) {
+    height: 50vh;
+  }
 `;
 
 export const Img1 = styled("img")`

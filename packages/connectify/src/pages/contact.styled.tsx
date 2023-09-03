@@ -5,16 +5,20 @@ export const MainContainer = styled("div")`
   justify-content: space-between;
   width: 100%;
 
-  /* @media (max-width: 750px) {
+  @media (max-width: 750px) {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-  } */
+  }
 `;
 
 export const Img = styled("img")`
   width: 80vw;
   height: calc(100vh - 10vh);
+
+  @media (max-width: 750px) {
+    width: 100vw;
+  }
 `;
 
 export const Col2 = styled("div")`

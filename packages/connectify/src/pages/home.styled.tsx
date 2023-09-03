@@ -24,7 +24,7 @@ export const Cell12 = styled("div")`
 
   video {
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     grid-column: 1;
     grid-row: 1 / span 2;
     object-fit: cover;
@@ -107,6 +107,7 @@ export const Cell312 = styled("div")`
 
   @media (max-width: 750px) {
     display: block;
+    height: 100vh;
   }
 `;
 

@@ -90,7 +90,7 @@ const Contact: React.FC<Props> = ({ widthSpace }) => {
                   <Validate
                     name="email"
                     regex={[
-                      /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                      /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
                       "Votre email n'est pas valide",
                     ]}
                     after={(result: any) => setValidationEmail(result)}
@@ -119,7 +119,7 @@ const Contact: React.FC<Props> = ({ widthSpace }) => {
                     name="sujet"
                     custom={[
                       (value) => value.length <= 10 && value.length > 0,
-                      "Sujet ne peut pas être plus long que 10 characters ou vide",
+                      "Maximum 10 ch",
                     ]}
                     after={(result: any) => setValidationSujet(result)}
                   >
