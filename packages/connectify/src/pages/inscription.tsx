@@ -80,7 +80,7 @@ const Inscription: React.FC = () => {
   };
 
   const showError = (err: Error) => {
-    enqueueSnackbar("Quelque shose ne va pas", { variant: "error" });
+    enqueueSnackbar("Quelque chose ne va pas", { variant: "error" });
     console.error(err);
   };
 
@@ -99,7 +99,6 @@ const Inscription: React.FC = () => {
   useEffect(() => {
     if (password2 === user.password) setIsPasswordTrue(true);
     else setIsPasswordTrue(false);
-    console.log("isPasswordTrue " + isPasswordTrue);
   }, [password2]);
 
   const addUser = async () => {
